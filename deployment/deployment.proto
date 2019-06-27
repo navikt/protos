@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+package deployment;
+
+enum PlatformType {
+    jboss = 0;
+    was = 1;
+    bpm = 2;
+    nais = 3;
+}
+
+enum Source {
+    aura = 0;
+    naisd = 1;
+    naiserator = 2;
+}
+
+enum RolloutStatus {
+    unknown = 0;
+    initialized = 1;
+    complete = 2;
+}
+
+enum EnvironmentClass {
+    production = 0;
+    development = 1;
+}
+
+message Platform {
+    PlatformType type = 1;
+    string variant = 2;
+}
+
+message Deployer {
+    string ident = 1;
+    string email = 2;
+    string name = 3;
+}
+
+message ContainerImage {
+    string name = 1;
+    string tag = 2;
+    string hash = 3;
+}
+
+message DeploymentEvent {
+    string correlationID = 1;
+    Platform platform = 2;
+    Source source = 3;
+    Deployer deployer = 4;
+    string team = 5;
+    RolloutStatus rolloutStatus = 6;
+    EnvironmentClass environmentClass = 7;
+    string environment = 8;
+    string namespace = 9;
+    string cluster = 10;
+    string application = 11;
+    string version = 12;
+    ContainerImage image = 13;
+    int64 timestamp = 14;
+}
+
