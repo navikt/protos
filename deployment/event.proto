@@ -1,7 +1,10 @@
 syntax = "proto3";
 
+// This file contains models used for reporting deployment events.
+
 package deployment;
 
+// PlatformType denotes what kind of platform are used for deploying.
 enum PlatformType {
     jboss = 0;
     was = 1;
@@ -9,40 +12,50 @@ enum PlatformType {
     nais = 3;
 }
 
+// Only enumerated systems can report deployment status.
 enum Source {
     aura = 0;
     naisd = 1;
     naiserator = 2;
 }
 
+// RolloutStatus denotes whether a deployment has been initialized,
+// rolled out successfully, or if the status is altogether unknown.
 enum RolloutStatus {
     unknown = 0;
     initialized = 1;
     complete = 2;
 }
 
+// EnvironmentClass separates between production and development environments.
 enum EnvironmentClass {
     production = 0;
     development = 1;
 }
 
+// A platform represents a place where applications and systems are deployed.
+// Since platforms come in different versions and flavors, a variant can also be specified.
 message Platform {
     PlatformType type = 1;
     string variant = 2;
 }
 
+// Deployer is a human being or a service account.
 message Deployer {
     string ident = 1;
     string email = 2;
     string name = 3;
 }
 
+// Containerimage is a reference to a image that can be deployed as a container,
+// typically a Docker container inside a Kubernetes pod.
 message ContainerImage {
     string name = 1;
     string tag = 2;
     string hash = 3;
 }
 
+// DeploymentEvent represents a deployment that has been made on any of NAV's systems.
 message DeploymentEvent {
     string correlationID = 1;
     Platform platform = 2;
