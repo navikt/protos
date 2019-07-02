@@ -13,7 +13,7 @@ enum PlatformType {
 }
 
 // Only enumerated systems can report deployment status.
-enum Source {
+enum System {
     aura = 0;
     naisd = 1;
     naiserator = 2;
@@ -27,8 +27,8 @@ enum RolloutStatus {
     complete = 2;
 }
 
-// EnvironmentClass separates between production and development environments.
-enum EnvironmentClass {
+// Environment separates between production and development environments.
+enum Environment {
     production = 0;
     development = 1;
 }
@@ -40,14 +40,14 @@ message Platform {
     string variant = 2;
 }
 
-// Deployer is a human being or a service account.
-message Deployer {
+// Actor is a human being or a service account.
+message Actor {
     string ident = 1;
     string email = 2;
     string name = 3;
 }
 
-// Containerimage is a reference to a image that can be deployed as a container,
+// ContainerImage is a reference to a image that can be deployed as a container,
 // typically a Docker container inside a Kubernetes pod.
 message ContainerImage {
     string name = 1;
@@ -55,21 +55,50 @@ message ContainerImage {
     string hash = 3;
 }
 
-// DeploymentEvent represents a deployment that has been made on any of NAV's systems.
-message DeploymentEvent {
+// Event represents a deployment that has been made on any of NAV's systems.
+message Event {
+    // CorrelationID can be used to correlate events across different systems.
     string correlationID = 1;
+
+    // Platform represents the technical platform on which the deployment was made.
     Platform platform = 2;
-    Source source = 3;
-    Deployer deployer = 4;
+
+    // Source tells which system that reported the deployment.
+    System source = 3;
+
+    // Deployer is a reference to a human being that started the deployment.
+    Actor deployer = 4;
+
+    // Team is an organizational structure within NAV and refers to a group of people.
     string team = 5;
+
+    // RolloutStatus shows the deployment status.
     RolloutStatus rolloutStatus = 6;
-    EnvironmentClass environmentClass = 7;
-    string environment = 8;
+
+    // Environment can be production or development.
+    Environment environment = 7;
+
+    // The SKYA platform divides between production, development, staging, and test.
+    // Furthermore, these environments are divided into smaller segments denoted with
+    // a number, such as q0, t6, u11.
+    string skyaEnvironment = 8;
+
+    // Namespace represents the Kubernetes namespace this deployment was made into.
     string namespace = 9;
+
+    // Cluster is the name of the Kubernetes cluster that was deployed to.
     string cluster = 10;
+
+    // Application is the name of the deployed application.
     string application = 11;
+
+    // Version is the version of the deployed application.
     string version = 12;
+
+    // Image refers to the container source, usually a Docker image.
     ContainerImage image = 13;
+
+    // Timestamp is the generation time of the deployment event.
     int64 timestamp = 14;
 }
 
