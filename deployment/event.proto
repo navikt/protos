@@ -4,6 +4,8 @@ syntax = "proto3";
 
 package deployment;
 
+option java_package = "no.nav.protos.deployment";
+
 // PlatformType denotes what kind of platform are used for deploying.
 enum PlatformType {
     jboss = 0;

@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package deployment;
 
+option java_package = "no.nav.protos.deployment";
+
 import "google/protobuf/struct.proto";
 
 message GithubRepository {
