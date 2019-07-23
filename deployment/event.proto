@@ -2,9 +2,12 @@ syntax = "proto3";
 
 // This file contains models used for reporting deployment events.
 
+import "google/protobuf/timestamp.proto";
+
 package deployment;
 
 option java_package = "no.nav.protos.deployment";
+option java_outer_classname = "DeploymentEvent";
 
 // PlatformType denotes what kind of platform are used for deploying.
 enum PlatformType {
@@ -101,6 +104,6 @@ message Event {
     ContainerImage image = 13;
 
     // Timestamp is the generation time of the deployment event.
-    int64 timestamp = 14;
+    google.protobuf.Timestamp timestamp = 14;
 }
 
