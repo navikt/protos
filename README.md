@@ -11,5 +11,13 @@ Protocol buffers, or _Protobuf_, are Google's language-neutral, platform-neutral
 ### Golang
 
 ```
-/usr/local/bin/protoc --plugin=~/go/bin/protoc-gen-go --go_out=. <file.proto>
+mkdir -p output/go
+/usr/local/bin/protoc --plugin=~/go/bin/protoc-gen-go --go_out=output/go/ <file.proto>
+```
+
+### Java
+
+```
+mkdir -p output/java
+/usr/local/bin/protoc --java_out=output/java/ <file.proto>
 ```
