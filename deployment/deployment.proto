@@ -26,6 +26,8 @@ enum GithubDeploymentState {
 message DeploymentSpec {
     GithubRepository repository = 1;
     int64 deploymentID = 2;
+    string environment = 3;
+    string ref = 4;
 }
 
 message Kubernetes {
@@ -49,6 +51,7 @@ message DeploymentRequest {
     string deliveryID = 6;
     Payload payloadSpec = 7;
     google.protobuf.Timestamp time = 8;
+    DeploymentStatus status = 9;
 }
 
 message DeploymentStatus {
@@ -61,6 +64,7 @@ message DeploymentStatus {
     reserved "timestamp";
     reserved 7;
     google.protobuf.Timestamp time = 8;
+    string id = 9;
 }
 
 message SignedMessage {
