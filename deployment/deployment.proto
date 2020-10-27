@@ -71,3 +71,15 @@ message SignedMessage {
     bytes message = 1;
     bytes signature = 2;
 }
+
+message GetDeploymentOpts {
+    string cluster = 1;
+}
+
+message ReportStatusOpts {
+}
+
+service Deploy {
+    rpc Deployments(GetDeploymentOpts) returns (stream DeploymentRequest) {}
+    rpc ReportStatus(DeploymentStatus) returns (ReportStatusOpts) {}
+}
