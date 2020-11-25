@@ -52,6 +52,7 @@ message DeploymentRequest {
     Payload payloadSpec = 7;
     google.protobuf.Timestamp time = 8;
     DeploymentStatus status = 9;
+    string gitRefSha = 10;
 }
 
 message DeploymentStatus {
@@ -80,6 +81,8 @@ message ReportStatusOpts {
 }
 
 service Deploy {
-    rpc Deployments(GetDeploymentOpts) returns (stream DeploymentRequest) {}
-    rpc ReportStatus(DeploymentStatus) returns (ReportStatusOpts) {}
+    rpc Deployments (GetDeploymentOpts) returns (stream DeploymentRequest) {
+    }
+    rpc ReportStatus (DeploymentStatus) returns (ReportStatusOpts) {
+    }
 }
