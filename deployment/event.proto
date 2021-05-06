@@ -105,5 +105,9 @@ message Event {
 
     // Timestamp is the generation time of the deployment event.
     google.protobuf.Timestamp timestamp = 14;
+
+    // GitCommitSha refers to the commit that the application build is based on.
+    string gitCommitSha = 15;
+
 }
 
